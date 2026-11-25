@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prudhvi Peddisetty | Systems Administrator & Endpoint Engineer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            slatex: {
+              950: '#070b14',
+              900: '#0c1220',
+              850: '#111827',
+              800: '#162033',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom subtle grid background & print polish */
+    .bg-grid-pattern {
+      background-size: 36px 36px;
+      background-image: 
+        linear-gradient(to right, rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    }
+    .dark .bg-grid-pattern {
+      background-image: 
+        linear-gradient(to right, rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(16, 185, 129, 0.05) 1px, transparent 1px);
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #ffffff !important; color: #0f172a !important; }
+      .print-card { border: 1px solid #cbd5e1 !important; background: #ffffff !important; box-shadow: none !important; break-inside: avoid; }
+      .dark * { color: #0f172a !important; }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slatex-950 dark:text-slate-100 font-sans antialiased transition-colors duration-300 selection:bg-emerald-500/30 selection:text-emerald-300">
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none no-print">
+    <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-slate-900 dark:bg-slate-800 text-white border border-emerald-500/40 shadow-2xl">
+      <span class="flex h-2.5 w-2.5 rounded-full bg-emerald-400"></span>
+      <span id="toast-msg" class="text-sm font-medium">Copied to clipboard!</span>
+    </div>
+  </div>
+
+  <!-- Top Navigation -->
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-white/80 dark:bg-slatex-950/80 border-b border-slate-200/80 dark:border-slate-800/80 no-print">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Brand / Monogram -->
+      <a href="#top" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-sky-600 flex items-center justify-center text-white font-mono font-bold text-sm shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+          PP
+        </div>
+        <div class="hidden sm:block">
+          <span class="font-semibold text-sm tracking-tight block leading-none">Prudhvi Peddisetty</span>
+          <span class="text-[11px] font-mono text-emerald-600 dark:text-emerald-400">Systems & Endpoint Ops</span>
+        </div>
+      </a>
+
+      <!-- Desktop Links -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
+        <a href="#experience" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Experience</a>
+        <a href="#projects" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Projects</a>
+        <a href="#skills" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Skills</a>
+        <a href="#education" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Education</a>
+        <a href="#contact" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">Contact</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2.5">
+        <button onclick="window.print()" title="Print / Save as PDF" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/90 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700/80 transition-all">
+          <svg class="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+          <span class="hidden sm:inline">Save PDF</span>
+        </button>
+
+        <button id="theme-toggle" aria-label="Toggle Theme" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/90 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700/80 transition-all">
+          <!-- Sun icon (shown in dark mode) -->
+          <svg id="icon-sun" class="w-4 h-4 text-amber-400 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          <!-- Moon icon (shown in light mode) -->
+          <svg id="icon-moon" class="w-4 h-4 text-slate-700 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+        </button>
+
+        <button id="mobile-menu-btn" aria-label="Open Menu" class="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Nav Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slatex-950 px-4 py-3 space-y-2">
+      <a href="#experience" class="block py-2 text-sm font-medium hover:text-emerald-500">Experience</a>
+      <a href="#projects" class="block py-2 text-sm font-medium hover:text-emerald-500">Projects</a>
+      <a href="#skills" class="block py-2 text-sm font-medium hover:text-emerald-500">Skills</a>
+      <a href="#education" class="block py-2 text-sm font-medium hover:text-emerald-500">Education</a>
+      <a href="#contact" class="block py-2 text-sm font-medium hover:text-emerald-500">Contact</a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="top" class="relative overflow-hidden bg-grid-pattern border-b border-slate-200/80 dark:border-slate-800/80">
+    <div class="absolute inset-0 bg-gradient-to-b from-emerald-500/[0.06] via-sky-500/[0.03] to-transparent pointer-events-none"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-20 relative">
+      
+      <!-- Availability / Status Pill -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-700 dark:text-emerald-300 text-xs font-mono mb-6">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span>Hyderabad, India &bull; Open to L2 Support, Endpoint & Cloud Engineering Roles</span>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-10 items-start">
+        <!-- Main Bio -->
+        <div class="lg:col-span-8 space-y-5">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            Prudhvi Peddisetty
+          </h1>
+          <p class="text-lg sm:text-xl font-semibold bg-gradient-to-r from-emerald-600 to-sky-600 dark:from-emerald-400 dark:to-sky-400 bg-clip-text text-transparent">
+            Systems Administrator &nbsp;|&nbsp; Endpoint &amp; Cloud Engineering &nbsp;|&nbsp; L2 Technical Support
+          </p>
+          <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-3xl">
+            Systems Administrator with hands-on experience in Windows administration, Microsoft Intune device management, Microsoft Entra ID, and endpoint security across <strong class="font-semibold text-slate-900 dark:text-white">1,000+ enterprise devices</strong>. Skilled in PowerShell automation, OS deployment, IT asset lifecycle management, and Microsoft 365 administration, focused on improving operational efficiency and advancing toward Endpoint and Cloud Engineering roles.
+          </p>
+
+          <!-- Primary Contact Bar -->
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="mailto:prudhvipeddisetty8@gmail.com" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-sm shadow-lg shadow-emerald-600/20 transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <span>prudhvipeddisetty8@gmail.com</span>
+            </a>
+
+            <button onclick="copyText('prudhvipeddisetty8@gmail.com', 'Email address copied!')" class="no-print inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700/90 text-sm font-medium transition-all">
+              <svg class="w-4 h-4 text-sky-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              <span>Copy Email</span>
+            </button>
+
+            <a href="tel:+917093264958" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700/90 text-sm font-medium transition-all">
+              <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+              <span>+91 70932 64958</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Executive Snapshot Card -->
+        <div class="lg:col-span-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 p-6 shadow-xl print-card">
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-slate-200 dark:border-slate-800">
+            <span class="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">System Profile</span>
+            <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/20">VERIFIED</span>
+          </div>
+          <dl class="space-y-3.5 text-sm">
+            <div class="flex justify-between gap-2">
+              <dt class="text-slate-500 dark:text-slate-400">Current Role</dt>
+              <dd class="font-semibold text-right">Systems Administrator</dd>
+            </div>
+            <div class="flex justify-between gap-2">
+              <dt class="text-slate-500 dark:text-slate-400">Organization</dt>
+              <dd class="font-semibold text-right">Examity - Meazure Learning</dd>
+            </div>
+            <div class="flex justify-between gap-2">
+              <dt class="text-slate-500 dark:text-slate-400">Location</dt>
+              <dd class="font-medium text-right">Hyderabad, India</dd>
+            </div>
+            <div class="flex justify-between gap-2">
+              <dt class="text-slate-500 dark:text-slate-400">Core Stack</dt>
+              <dd class="font-mono text-xs text-right text-emerald-600 dark:text-emerald-400">Intune &bull; Entra ID &bull; PowerShell</dd>
+            </div>
+          </dl>
+          <div class="mt-5 pt-4 border-t border-slate-200 dark:border-slate-800 no-print">
+            <button onclick="copySummary()" class="w-full py-2.5 px-4 rounded-xl bg-slate-900 hover:bg-slate-800 dark:bg-slate-800 dark:hover:bg-slate-700 text-white text-xs font-medium flex items-center justify-center gap-2 transition-colors">
+              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+              <span>Copy Executive Resume Summary</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Metrics Row -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-12">
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+          <div class="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">1,000+</div>
+          <div class="text-sm font-semibold mt-1">Enterprise Endpoints Managed</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Desktops, laptops, peripherals &amp; lifecycle tracking</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+          <div class="text-2xl sm:text-3xl font-extrabold text-sky-600 dark:text-sky-400 font-mono">3+ Years</div>
+          <div class="text-sm font-semibold mt-1">Enterprise IT Experience</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Mar '23 &ndash; Present at Examity - Meazure Learning</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+          <div class="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 font-mono">L1 / L2 SLA</div>
+          <div class="text-sm font-semibold mt-1">Incident &amp; Escalation Resolution</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Windows, VPN, DNS, M365 &amp; cross-team diagnostics</p>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-white dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 shadow-sm print-card">
+          <div class="text-2xl sm:text-3xl font-extrabold text-sky-600 dark:text-sky-400 font-mono">Automation</div>
+          <div class="text-sm font-semibold mt-1">PowerShell, WinRM &amp; Intune</div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Bulk software deployment, compliance &amp; Python OCR</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-24">
+
+    <!-- Professional Experience -->
+    <section id="experience" class="scroll-mt-24">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Career Track</span>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mt-1">Professional Experience</h2>
+        </div>
+
+        <!-- Category Filter Pills -->
+        <div class="flex flex-wrap gap-2 no-print" id="exp-filters">
+          <button data-filter="all" class="exp-filter-btn active px-3.5 py-1.5 rounded-xl text-xs font-medium bg-emerald-600 text-white shadow-sm transition-all">All Responsibilities (9)</button>
+          <button data-filter="endpoint" class="exp-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300/70 dark:hover:bg-slate-700 transition-all">Endpoint &amp; Intune</button>
+          <button data-filter="support" class="exp-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300/70 dark:hover:bg-slate-700 transition-all">L1/L2 Support &amp; Network</button>
+          <button data-filter="automation" class="exp-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-medium bg-slate-200/70 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300/70 dark:hover:bg-slate-700 transition-all">Automation &amp; Assets</button>
+        </div>
+      </div>
+
+      <div class="rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-sm print-card">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-6 mb-6 border-b border-slate-200 dark:border-slate-800">
+          <div>
+            <div class="flex items-center gap-2.5 flex-wrap">
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">Systems Administrator</h3>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">Current Role</span>
+            </div>
+            <p class="text-base font-medium text-sky-600 dark:text-sky-400 mt-1">Examity - Meazure Learning</p>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 text-xs font-mono text-slate-700 dark:text-slate-300 self-start">
+            <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            <span>Mar '23 &ndash; Present</span>
+          </div>
+        </div>
+
+        <ul id="experience-list" class="space-y-4">
+          <li data-category="endpoint support" class="exp-item flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/80 transition-all">
+            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-emerald-500"></span>
+            <div class="flex-1">
+              <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">Managed and supported <strong>1,000+ endpoint devices</strong> (desktops, laptops, peripherals) to troubleshoot enterprise issues and ensure smooth daily operations with minimal downtime.</p>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Endpoint Management</span>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">Enterprise Scale</span>
+              </div>
+            </div>
+          </li>
+
+          <li data-category="endpoint" class="exp-item flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/80 transition-all">
+            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-emerald-500"></span>
+            <div class="flex-1">
+              <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">Administered <strong>Microsoft Entra ID</strong> and <strong>Microsoft Intune</strong> for user identity, device provisioning, Intune enrollment, and endpoint security policies supporting Microsoft 365 users.</p>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Microsoft Intune</span>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Microsoft Entra ID</span>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">Microsoft 365</span>
+              </div>
+            </div>
+          </li>
+
+          <li data-category="support" class="exp-item flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/80 transition-all">
+            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-sky-500"></span>
+            <div class="flex-1">
+              <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">Delivered <strong>L1/L2 technical support</strong> for Windows laptops, desktops, VPN, printers, and enterprise applications, resolving incidents within SLA targets and maintaining clear documentation.</p>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">L1/L2 Support</span>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">SLA Incident Management</span>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-slate-500/10 text-slate-600 dark:text-slate-300">Documentation</span>
+              </div>
+            </div>
+          </li>
+
+          <li data-category="endpoint automation" class="exp-item flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/80 transition-all">
+            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-emerald-500"></span>
+            <div class="flex-1">
+              <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">Executed employee <strong>onboarding and offboarding workflows</strong>, including user provisioning, access management, and hardware asset allocation within Microsoft 365.</p>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Identity &amp; Access</span>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">IAM Lifecycle</span>
+              </div>
+            </div>
+          </li>
+
+          <li data-category="automation" class="exp-item flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/80 transition-all">
+            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-sky-500"></span>
+            <div class="flex-1">
+              <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">Automated routine Windows administration tasks using <strong>PowerShell scripting</strong> to streamline operations and reduce manual effort.</p>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">PowerShell Automation</span>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Windows Admin</span>
+              </div>
+            </div>
+          </li>
+
+          <li data-category="endpoint support" class="exp-item flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/80 transition-all">
+            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-emerald-500"></span>
+            <div class="flex-1">
+              <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">Supported <strong>OneDrive backup, data migration, and user profile restoration</strong> during device replacements and OS upgrades.</p>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">OneDrive</span>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">OS Migration</span>
+              </div>
+            </div>
+          </li>
+
+          <li data-category="automation" class="exp-item flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/80 transition-all">
+            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-sky-500"></span>
+            <div class="flex-1">
+              <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">Maintained <strong>IT asset inventory and lifecycle management</strong> for infrastructure systems and endpoints, ensuring accurate tracking and timely refresh cycles.</p>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">ITAM</span>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-slate-500/10 text-slate-600 dark:text-slate-300">Lifecycle Management</span>
+              </div>
+            </div>
+          </li>
+
+          <li data-category="support" class="exp-item flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/80 transition-all">
+            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-sky-500"></span>
+            <div class="flex-1">
+              <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">Troubleshot networking issues across <strong>LAN, Wi-Fi, VPN, and DNS</strong> to ensure uninterrupted connectivity, collaborating with IT Cloud, Networking, and SaaS teams on cross-team incidents.</p>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">LAN / Wi-Fi / VPN / DNS</span>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Cross-Team Escalations</span>
+              </div>
+            </div>
+          </li>
+
+          <li data-category="endpoint automation" class="exp-item flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50/80 dark:bg-slate-950/60 border border-slate-200/60 dark:border-slate-800/80 transition-all">
+            <span class="mt-1 flex-shrink-0 w-2 h-2 rounded-full bg-emerald-500"></span>
+            <div class="flex-1">
+              <p class="text-sm sm:text-base text-slate-700 dark:text-slate-200 leading-relaxed">Contributed to <strong>OCR-based invoice automation using Python</strong> to improve asset and invoice data processing accuracy, alongside regular system patching and endpoint security hardening.</p>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">Python OCR</span>
+                <span class="px-2 py-0.5 rounded-md text-[11px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Patching &amp; Hardening</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Technical Projects -->
+    <section id="projects" class="scroll-mt-24">
+      <div class="mb-8">
+        <span class="text-xs font-mono uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Engineering &amp; Internal Tools</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mt-1">Technical Projects</h2>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Click any project to inspect its architecture workflow and operational impact.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Project 1 -->
+        <article onclick="openProjectModal(0)" class="group cursor-pointer rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/60 dark:hover:border-emerald-500/50 p-6 flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 transition-all print-card">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              </div>
+              <span class="text-xs font-mono text-slate-400 group-hover:text-emerald-500 transition-colors no-print">Inspect Workflow &rarr;</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+              Centralized Software Deployment System
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              Developed a centralized web-based dashboard to automate software installation and uninstallation across Windows systems using PowerShell and WinRM, integrated with Microsoft Intune for secure endpoint policy enforcement, bulk deployment, real-time tracking, and reduced manual effort.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">PowerShell</span>
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">WinRM</span>
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Microsoft Intune</span>
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">Web Dashboard</span>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article onclick="openProjectModal(1)" class="group cursor-pointer rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-sky-500/60 dark:hover:border-sky-500/50 p-6 flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-sky-500/5 transition-all print-card">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-600 dark:text-sky-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+              </div>
+              <span class="text-xs font-mono text-slate-400 group-hover:text-sky-500 transition-colors no-print">Inspect Workflow &rarr;</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-sky-600 dark:group-hover:text-sky-400 transition-colors">
+              Enterprise Endpoint Inventory &amp; Compliance Dashboard
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              Developed an internal dashboard tracking device location, IP mapping, last login, offline status, and patch compliance enriched with Microsoft 365 user context to accelerate troubleshooting and proactive IT asset and update management.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">Microsoft 365</span>
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Endpoint Compliance</span>
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Asset Tracking</span>
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">Patch Management</span>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article onclick="openProjectModal(2)" class="group cursor-pointer rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-emerald-500/60 dark:hover:border-emerald-500/50 p-6 flex flex-col justify-between shadow-sm hover:shadow-xl hover:shadow-emerald-500/5 transition-all print-card">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-11 h-11 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+              </div>
+              <span class="text-xs font-mono text-slate-400 group-hover:text-emerald-500 transition-colors no-print">Inspect Workflow &rarr;</span>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+              Floor Map Automation
+            </h3>
+            <p class="text-sm text-slate-600 dark:text-slate-300 mt-3 leading-relaxed">
+              Built an automated floor map tracking system mapping workstation seating layouts to live endpoint inventory, IP addresses, and active user assignments to streamline physical asset audits and on-site IT support.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-1.5 mt-6 pt-4 border-t border-slate-100 dark:border-slate-800">
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">Asset Audits</span>
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-sky-500/10 text-sky-700 dark:text-sky-300">Live Inventory</span>
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">IP Mapping</span>
+            <span class="px-2.5 py-1 rounded-lg text-[11px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">IT Operations</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Technical Skills -->
+    <section id="skills" class="scroll-mt-24">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Capabilities &amp; Tooling</span>
+          <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mt-1">Technical Skills</h2>
+        </div>
+
+        <!-- Live Skill Search -->
+        <div class="relative w-full sm:w-72 no-print">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input id="skill-search" type="text" placeholder="Filter skills (e.g., Intune, PowerShell)..." class="w-full pl-10 pr-4 py-2 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all" />
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-12 gap-6">
+        <!-- Endpoint & Identity -->
+        <div class="md:col-span-7 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 p-6 shadow-sm print-card">
+          <div class="flex items-center gap-2.5 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <h3 class="text-base font-bold">Endpoint &amp; Identity Management</h3>
+          </div>
+          <div class="flex flex-wrap gap-2" id="skills-endpoint">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- Systems & Virtualization -->
+        <div class="md:col-span-5 rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 p-6 shadow-sm print-card">
+          <div class="flex items-center gap-2.5 mb-4">
+            <div class="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-600 dark:text-sky-400 flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>
+            </div>
+            <h3 class="text-base font-bold">Systems, Automation &amp; Virtualization</h3>
+          </div>
+          <div class="flex flex-wrap gap-2" id="skills-systems">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </div>
+      <p id="no-skill-msg" class="hidden text-sm text-slate-500 dark:text-slate-400 mt-4">No matching skills found. Try clearing your filter.</p>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="scroll-mt-24">
+      <div class="mb-6">
+        <span class="text-xs font-mono uppercase tracking-widest text-emerald-600 dark:text-emerald-400">Academic Background</span>
+        <h2 class="text-2xl sm:text-3xl font-bold tracking-tight mt-1">Education</h2>
+      </div>
+
+      <div class="rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm print-card">
+        <div class="flex items-start gap-4">
+          <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-600 dark:text-sky-400 flex-shrink-0">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/></svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Bachelor in Electronics &amp; Communication Engineering</h3>
+            <p class="text-sm font-medium text-slate-600 dark:text-slate-300 mt-1">MVR College of Engineering</p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap sm:flex-col sm:items-end gap-2">
+          <span class="px-3 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-mono text-slate-700 dark:text-slate-300">Jun 2018 &ndash; May 2022</span>
+          <span class="px-3 py-1 rounded-xl bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20 text-xs font-mono font-semibold">GPA: 6.73 CGPA</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / Direct Connect -->
+    <section id="contact" class="scroll-mt-24">
+      <div class="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 dark:from-slate-900 dark:via-slatex-900 dark:to-emerald-950/40 text-white border border-slate-800 p-8 sm:p-10 shadow-2xl print-card">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-7 space-y-4">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-mono bg-emerald-500/15 text-emerald-300 border border-emerald-500/30">
+              Let's Connect
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Ready to strengthen your Endpoint, Cloud, or L2 Support operations?</h2>
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Reach out directly via email or phone for Systems Administration, L2 User Support Engineer, Microsoft Intune / Entra ID, or Endpoint Engineering opportunities in Hyderabad or remote/hybrid environments.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <a href="mailto:prudhvipeddisetty8@gmail.com?subject=Opportunity%20for%20Prudhvi%20Peddisetty" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-sm transition-all">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                <span>Send Email</span>
+              </a>
+              <button onclick="copyText('+91 70932 64958', 'Phone number copied!')" class="no-print inline-flex items-center gap-2 px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/15 text-sm font-medium transition-all">
+                <span>Copy +91 70932 64958</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5 rounded-2xl bg-black/30 border border-white/10 p-6 space-y-4">
+            <div class="text-xs font-mono uppercase tracking-wider text-emerald-400">Direct Contact Details</div>
+            <div class="space-y-3 text-sm">
+              <div>
+                <div class="text-slate-400 text-xs">Email</div>
+                <div class="font-mono text-white select-all">prudhvipeddisetty8@gmail.com</div>
+              </div>
+              <div>
+                <div class="text-slate-400 text-xs">Phone</div>
+                <div class="font-mono text-white select-all">+91 70932 64958</div>
+              </div>
+              <div>
+                <div class="text-slate-400 text-xs">Base Location</div>
+                <div class="text-white">Hyderabad, India</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-800/80 py-8 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <span>&copy; 2026 Prudhvi Peddisetty. All rights reserved.</span>
+      <span class="font-mono">Systems Administrator &bull; Endpoint &amp; Cloud Engineering</span>
+    </div>
+  </footer>
+
+  <!-- Project Architecture Modal -->
+  <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm no-print">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl relative animate-fade-in">
+      <button onclick="closeProjectModal()" aria-label="Close Modal" class="absolute top-5 right-5 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+
+      <span id="modal-badge" class="inline-block px-2.5 py-1 rounded-lg text-xs font-mono bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 mb-3">
+        Project Architecture
+      </span>
+      <h3 id="modal-title" class="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white pr-8"></h3>
+      <p id="modal-desc" class="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-3 leading-relaxed"></p>
+
+      <div class="mt-6 p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+        <div class="text-xs font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400 mb-3">Execution Pipeline &amp; Operational Impact</div>
+        <ol id="modal-steps" class="space-y-2.5 text-sm text-slate-700 dark:text-slate-300 list-decimal list-inside"></ol>
+      </div>
+
+      <div id="modal-tags" class="flex flex-wrap gap-2 mt-6"></div>
+    </div>
+  </div>
+
+  <script>
+    // Data from Prudhvi Peddisetty's Resume
+    const endpointSkills = [
+      "Microsoft Intune",
+      "Windows Autopilot",
+      "Microsoft Entra ID (Azure AD)",
+      "Conditional Access",
+      "MFA",
+      "Microsoft 365 Administration",
+      "Configuration Profiles & Compliance Policies",
+      "BitLocker Encryption",
+      "Endpoint Management & Security",
+      "Active Directory",
+      "Group Policy (GPO)",
+      "OS Patching",
+      "WDS",
+      "Asset Management Tools",
+      "SaaS Support",
+      "Ticketing & SLA Support",
+      "Hardware & Network Troubleshooting"
+    ];
+
+    const systemsSkills = [
+      "Windows Administration",
+      "Windows Servers",
+      "PowerShell & WinRM",
+      "Proxmox / Hyper-V",
+      "Remote Support",
+      "Python (OCR Automation)"
+    ];
+
+    const projectDetails = [
+      {
+        title: "Centralized Software Deployment System",
+        desc: "Developed a centralized web-based dashboard to automate software installation and uninstallation across Windows systems using PowerShell and WinRM, integrated with Microsoft Intune for secure endpoint policy enforcement, bulk deployment, real-time tracking, and reduced manual effort.",
+        steps: [
+          "Initiates bulk software install/uninstall jobs from a unified web-based administration console.",
+          "Executes remote PowerShell payloads securely over WinRM across targeted Windows endpoints.",
+          "Integrates with Microsoft Intune to enforce compliance baselines and deployment policies.",
+          "Streams real-time job execution status back to IT support, eliminating repetitive manual installations."
+        ],
+        tags: ["PowerShell", "WinRM", "Microsoft Intune", "Web Dashboard", "Windows Automation"]
+      },
+      {
+        title: "Enterprise Endpoint Inventory & Compliance Dashboard",
+        desc: "Developed an internal dashboard tracking device location, IP mapping, last login, offline status, and patch compliance enriched with Microsoft 365 user context to accelerate troubleshooting and proactive IT asset and update management.",
+        steps: [
+          "Aggregates device telemetry including physical location, IP address mapping, last login timestamp, and offline state.",
+          "Enriches hardware records with Microsoft 365 user identity context for instant user-to-device correlation.",
+          "Surfaces OS patch compliance gaps so L2 support and admins can remediate non-compliant endpoints proactively.",
+          "Accelerates root-cause triage during support tickets and scheduled update cycles."
+        ],
+        tags: ["Microsoft 365", "Endpoint Compliance", "Asset Tracking", "Patch Management", "Telemetry"]
+      },
+      {
+        title: "Floor Map Automation",
+        desc: "Built an automated floor map tracking system mapping workstation seating layouts to live endpoint inventory, IP addresses, and active user assignments to streamline physical asset audits and on-site IT support.",
+        steps: [
+          "Maps physical office seating layouts directly to live workstation inventory records.",
+          "Links each desk node with active IP addresses, hardware tags, and assigned users.",
+          "Enables rapid desk-side dispatch for on-site L1/L2 support technicians.",
+          "Streamlines periodic physical IT asset audits and hardware lifecycle reconciliation."
+        ],
+        tags: ["Asset Audits", "Live Inventory", "IP Mapping", "IT Operations", "Workstation Layout"]
+      }
+    ];
+
+    // Render Skill Badges
+    function renderSkills(filterText = "") {
+      const query = filterText.trim().toLowerCase();
+      const endpointContainer = document.getElementById("skills-endpoint");
+      const systemsContainer = document.getElementById("skills-systems");
+      const noMsg = document.getElementById("no-skill-msg");
+
+      endpointContainer.innerHTML = "";
+      systemsContainer.innerHTML = "";
+
+      let matchCount = 0;
+
+      endpointSkills.forEach(skill => {
+        if (!query || skill.toLowerCase().includes(query)) {
+          matchCount++;
+          const badge = document.createElement("span");
+          badge.className = "px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-800/90 text-slate-800 dark:text-slate-200 border border-slate-200/80 dark:border-slate-700/80 hover:border-emerald-500/50 transition-colors";
+          badge.textContent = skill;
+          endpointContainer.appendChild(badge);
+        }
+      });
+
+      systemsSkills.forEach(skill => {
+        if (!query || skill.toLowerCase().includes(query)) {
+          matchCount++;
+          const badge = document.createElement("span");
+          badge.className = "px-3 py-1.5 rounded-xl text-xs font-medium bg-sky-500/10 text-sky-800 dark:text-sky-200 border border-sky-500/20 hover:border-sky-500/50 transition-colors";
+          badge.textContent = skill;
+          systemsContainer.appendChild(badge);
+        }
+      });
+
+      if (matchCount === 0) {
+        noMsg.classList.remove("hidden");
+      } else {
+        noMsg.classList.add("hidden");
+      }
+    }
+
+    // Experience Category Filtering
+    document.querySelectorAll(".exp-filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".exp-filter-btn").forEach(b => {
+          b.classList.remove("bg-emerald-600", "text-white", "shadow-sm");
+          b.classList.add("bg-slate-200/70", "dark:bg-slate-800", "text-slate-700", "dark:text-slate-300");
+        });
+        btn.classList.remove("bg-slate-200/70", "dark:bg-slate-800", "text-slate-700", "dark:text-slate-300");
+        btn.classList.add("bg-emerald-600", "text-white", "shadow-sm");
+
+        const filter = btn.getAttribute("data-filter");
+        document.querySelectorAll(".exp-item").forEach(item => {
+          const cats = item.getAttribute("data-category");
+          if (filter === "all" || cats.includes(filter)) {
+            item.classList.remove("hidden");
+          } else {
+            item.classList.add("hidden");
+          }
+        });
+      });
+    });
+
+    // Project Modal Controls
+    function openProjectModal(index) {
+      const project = projectDetails[index];
+      if (!project) return;
+
+      document.getElementById("modal-title").textContent = project.title;
+      document.getElementById("modal-desc").textContent = project.desc;
+
+      const stepsEl = document.getElementById("modal-steps");
+      stepsEl.innerHTML = "";
+      project.steps.forEach(step => {
+        const li = document.createElement("li");
+        li.textContent = step;
+        stepsEl.appendChild(li);
+      });
+
+      const tagsEl = document.getElementById("modal-tags");
+      tagsEl.innerHTML = "";
+      project.tags.forEach(tag => {
+        const span = document.createElement("span");
+        span.className = "px-2.5 py-1 rounded-lg text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700";
+        span.textContent = tag;
+        tagsEl.appendChild(span);
+      });
+
+      const modal = document.getElementById("project-modal");
+      modal.classList.remove("hidden");
+      modal.classList.add("flex");
+    }
+
+    function closeProjectModal() {
+      const modal = document.getElementById("project-modal");
+      modal.classList.add("hidden");
+      modal.classList.remove("flex");
+    }
+
+    document.getElementById("project-modal").addEventListener("click", (e) => {
+      if (e.target.id === "project-modal") closeProjectModal();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeProjectModal();
+    });
+
+    // Clipboard Helper (iframe-safe execCommand fallback)
+    function copyText(text, message) {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        showToast(message);
+      } catch (err) {
+        showToast("Unable to copy automatically.");
+      }
+      document.body.removeChild(textarea);
+    }
+
+    function copySummary() {
+      const summary = `Prudhvi Peddisetty | Systems Administrator (Endpoint & Cloud Engineering / L2 Technical Support)
+Location: Hyderabad, India | Phone: +91 70932 64958 | Email: prudhvipeddisetty8@gmail.com
+Experience: Systems Administrator at Examity - Meazure Learning (Mar '23 - Present), managing 1,000+ enterprise endpoints across Windows, Microsoft Intune, Entra ID, M365, PowerShell automation, and L1/L2 SLA support.`;
+      copyText(summary, "Executive summary copied!");
+    }
+
+    let toastTimeout;
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      document.getElementById("toast-msg").textContent = msg;
+      toast.classList.remove("translate-y-20", "opacity-0");
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add("translate-y-20", "opacity-0");
+      }, 2600);
+    }
+
+    // Theme Toggle
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+    });
+
+    // Mobile Menu Toggle
+    document.getElementById("mobile-menu-btn").addEventListener("click", () => {
+      document.getElementById("mobile-menu").classList.toggle("hidden");
+    });
+
+    // Skill Search Listener
+    document.getElementById("skill-search").addEventListener("input", (e) => {
+      renderSkills(e.target.value);
+    });
+
+    // Initialize
+    window.addEventListener("DOMContentLoaded", () => {
+      renderSkills();
+    });
+  </script>
+</body>
+</html>
